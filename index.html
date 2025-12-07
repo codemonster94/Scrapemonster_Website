@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MuscleMap — Balanced Training, Automatically</title>
+
+<style>
+  :root{
+    /* Exact same colors */
+    --bg-top:#141a1d;
+    --bg-bottom:#232e35;
+    --bg:#1f2932;
+    --card:#27343b;
+    --muted:#9aa6ad;
+    --accent:#e5b99f;
+    --primary:#49a6ff;
+    --glass: rgba(255,255,255,0.03);
+    --radius: 16px;
+    --text-main:#f3f5f6;
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    color: var(--text-main);
+    font-size: 17px;
+    line-height: 1.55;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Subtle animated gradient overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(73, 166, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(229, 185, 159, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 100px 0 120px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Decorative elements behind hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(73, 166, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+  }
+
+  .hero h1 {
+    font-size: 54px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--text-main) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: var(--muted);
+    font-size: 20px;
+  }
+
+  .cta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #111;
+    box-shadow: 0 4px 20px rgba(229, 185, 159, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(229, 185, 159, 0.4);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--muted);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 60px 0;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+  }
+
+  /* FEATURES */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    padding: 32px 24px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+  }
+
+  .feature h3 {
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: var(--text-main);
+  }
+
+  .feature p {
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* MOCKUP with visual content */
+  .mockup {
+    width: 100%;
+    max-width: 320px;
+    height: 600px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #0f1315 0%, #1a1f21 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    padding: 0;
+  }
+
+  .mockup img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 23px;
+  }
+
+  /* HOW IT WORKS */
+  .how-it-works-container {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .how-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .how-header {
+    margin-bottom: 30px;
+  }
+
+  .how-header h2 {
+    margin-bottom: 8px;
+  }
+
+  .how-subtitle {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 24px;
+    border-radius: 12px;
+    color: var(--muted);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .step strong {
+    color: var(--text-main);
+    font-size: 18px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* PRICING */
+  .pricing-box {
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 40px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(39, 52, 59, 0.8) 100%);
+    color: var(--text-main);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .pricing-box::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(229, 185, 159, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .pricing-box.highlight {
+    animation: pulseGlow 2s ease-in-out;
+  }
+
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    50% {
+      box-shadow: 0 20px 80px rgba(229, 185, 159, 0.4), 0 0 30px rgba(229, 185, 159, 0.2);
+      transform: scale(1.02);
+    }
+    100% {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+  }
+
+  .pricing-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(229, 185, 159, 0.15);
+    border: 1px solid rgba(229, 185, 159, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .pricing-box h2 {
+    margin: 0 0 10px;
+    font-size: 32px;
+  }
+
+  .price {
+    font-size: 52px;
+    margin: 10px 0;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--text-main) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pricing-features {
+    text-align: left;
+    margin: 30px 0;
+    padding: 30px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .pricing-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--muted);
+  }
+
+  .pricing-feature::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 80px 0 40px;
+    color: var(--muted);
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 60px;
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: linear-gradient(135deg, var(--card) 0%, rgba(39, 52, 59, 0.95) 100%);
+    margin: auto;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .close {
+    color: var(--muted);
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: var(--text-main);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    color: var(--text-main);
+    font-size: 16px;
+    font-family: Inter, system-ui, sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .form-input::placeholder {
+    color: var(--muted);
+  }
+
+  /* Tooltip Styles */
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+  }
+
+  .tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid var(--muted);
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .tooltip-icon:hover {
+    border-color: var(--text-main);
+    color: var(--text-main);
+  }
+
+  .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    background: rgba(39, 52, 59, 0.98);
+    color: var(--text-main);
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    z-index: 1000;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(39, 52, 59, 0.98) transparent transparent transparent;
+  }
+
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltip-link {
+    display: block;
+    margin-top: 8px;
+    color: var(--accent);
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .tooltip-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .how-it-works-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 38px;
+    }
+    
+    .hero p {
+      font-size: 18px;
+    }
+
+    .steps {
+      grid-template-columns: 1fr;
+    }
+
+    .mockup {
+      max-width: 280px;
+      height: 520px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 32px;
+    }
+
+    .how-header {
+      margin-bottom: 20px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Train Balanced. Automatically.</h1>
+    <p>MuscleMap creates long-term, muscle-first workout plans, prevents skipped muscles, adapts to soreness, and keeps your training balanced — without you thinking.</p>
+
+    <div class="cta">
+      <button class="btn btn-primary" onclick="openModal()">Join Early Access — Free</button>
+      <button class="btn btn-ghost" onclick="scrollToPricing()">Explore Premium</button>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section>
+    <h2 class="section-title">What Makes MuscleMap Different</h2>
+    <p class="section-sub">A minimal, intelligent system that removes randomness from your workouts and ensures balanced training across weeks and months.</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Muscle-First Planning</h3>
+        <p>Plans built around muscles, not exercises. Prevents imbalance and skipped muscle groups.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Adaptive Soreness Logic</h3>
+        <p>Tell the app how you feel — it instantly rebalances your entire plan without overthinking.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Long-Term Structure</h3>
+        <p>Generate 1–12 week programs that stay aligned with your goals and recovery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="padding-top: 80px;">
+    <div class="how-it-works-container">
+      <div class="how-content">
+        <div class="how-header">
+          <h2 class="section-title" style="margin-bottom: 0; text-align: left;">How it works</h2>
+          <div class="how-subtitle">Simple • Transparent • Muscle-first</div>
+        </div>
+        
+        <div class="steps">
+          <div class="step">
+            <strong>1. Set priorities</strong>
+            <span>Choose target muscles & frequency.</span>
+          </div>
+          <div class="step">
+            <strong>2. Auto-generate</strong>
+            <span>Get a 1–12 week, muscle-balanced plan.</span>
+          </div>
+          <div class="step">
+            <strong>3. Track & adapt</strong>
+            <span>Log sets/reps, mark soreness — plan rebalances.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mockup">
+        <img src="images/app-screenshot.png" alt="MuscleMap App Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- FOUNDER SECTION -->
+<section style="background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 24px;">
+  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 20px; color: var(--text-main);">Built by Someone Who Gets It</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 800px; margin: 0 auto 60px;">
+      MuscleMap is built by <strong style="color: var(--text-main);">Guddu</strong>, founder of <strong style="color: var(--text-main);">Coding Monks OÜ (Estonia)</strong> — a developer and lifter frustrated by unbalanced training. The problems: chasing favorite muscles based on mood, forgetting what you trained days ago, planning fatigue, and rigid programs that ignore how you actually feel. MuscleMap solves this with muscle-first planning that adapts to soreness, tracks balance over weeks (not just workouts), and auto-generates 1–12 week programs. Train balanced, automatically—without the mental overhead.
+    </p>
+    
+    <!-- PRICING MOVED HERE -->
+    <div id="pricing" style="margin-top: 100px; margin-bottom: 50px;">
+      <h2 style="font-size: 28px; font-weight: 600; margin-bottom: 16px; color: var(--text-main);">Early Access Pricing</h2>
+      <p style="color: var(--muted); font-size: 15px; margin-bottom: 40px;">Unlock all premium features for 6 months.</p>
+      
+      <div class="pricing-box" style="margin: 0 auto;">
+        <span class="pricing-badge">Early Launch</span>
+        <h2>Premium</h2>
+        <div class="price">$9.99</div>
+        <p style="margin-bottom:0;color:var(--muted)">6-month subscription</p>
+        
+        <div class="pricing-features">
+          <div class="pricing-feature">Unlimited workout plans</div>
+          <div class="pricing-feature">Advanced soreness tracking</div>
+          <div class="pricing-feature">Long-term program generator</div>
+          <div class="pricing-feature">Exercise library access</div>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 10px; color: var(--muted); font-size: 14px;">
+          🔒 Secure checkout powered by <svg style="height: 16px; vertical-align: middle; margin-left: 4px;" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg"><path fill="#635BFF" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.93 0 1.85 6.29.97 6.29 5.88z"/></svg>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 20px; color: var(--muted); font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center;">
+          30-Day Money-Back Guarantee
+          <span class="tooltip-container">
+            <span class="tooltip-icon">i</span>
+            <span class="tooltip-text">
+              Try MuscleMap risk-free. Not satisfied? Full refund, no questions asked.
+              <a href="refund.html" class="tooltip-link">Refund Policy →</a>
+            </span>
+          </span>
+        </div>
+        
+        <a href="https://buy.stripe.com/6oU14n1My5lfaeC9AA" class="btn btn-primary" style="width: 100%; display: block; text-decoration: none; text-align: center;">Get Started</a>
+      </div>
+    </div>
+</section>
+
+<!-- PREMIUM FOOTER -->
+<footer style="background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.05); padding: 32px 24px;">
+  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    
+    <!-- Contact Section -->
+    <div style="color: var(--muted); font-size: 14px; font-weight: 500; margin-bottom: 16px;">
+      Questions or feedback?
+    </div>
+    <div style="margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px;">
+      <a href="mailto:guddubhagat88@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 16px;">guddubhagat88@gmail.com</a>
+      <a href="https://www.linkedin.com/in/guddubhagat/" target="_blank" style="display: inline-flex; align-items: center;">
+        <svg style="width: 18px; height: 18px; fill: var(--muted); transition: fill 0.2s ease;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onmouseover="this.style.fill='var(--text-main)'" onmouseout="this.style.fill='var(--muted)'">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Divider -->
+    <div style="height: 1px; background: rgba(255,255,255,0.05); margin-bottom: 24px;"></div>
+    
+    <!-- Company Info -->
+    <div style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">
+      <strong style="color: var(--text-main); font-weight: 600;">Coding Monks OÜ</strong>, Estonia (EU) — 16568458
+    </div>
+    
+    <!-- Legal Links -->
+    <div style="font-size: 13px; margin-bottom: 16px;">
+      <a href="privacy.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
+      <span style="color: var(--muted); margin: 0 8px;">·</span>
+      <a href="terms.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
+      <span style="color: var(--muted); margin: 0 8px;">·</span>
+      <a href="refund.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
+    </div>
+    
+    <!-- Copyright -->
+    <div style="color: var(--muted); font-size: 12px;">
+      © 2024 MuscleMap — Built for serious lifters
+    </div>
+    
+  </div>
+</footer>
+
+
+<!-- Modal for Early Access Form -->
+<div id="earlyAccessModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 style="margin-top: 0; margin-bottom: 8px;">Join Early Access</h2>
+    <p style="color: var(--muted); margin-bottom: 30px;">Be the first to experience MuscleMap. Enter your email below.</p>
+    
+    <form action="https://formspree.io/f/mrbnlwll" method="POST" id="earlyAccessForm">
+      <input type="email" name="email" placeholder="your@email.com" required class="form-input" />
+      <input type="text" name="name" placeholder="Your name (optional)" class="form-input" />
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Submit</button>
+    </form>
+    
+    <p id="formStatus" style="margin-top: 20px; text-align: center; color: var(--accent); display: none;"></p>
+  </div>
+</div>
+
+<script>
+  // Get the modal
+  const modal = document.getElementById('earlyAccessModal');
+  const form = document.getElementById('earlyAccessForm');
+  const formStatus = document.getElementById('formStatus');
+
+  // Open modal
+  function openModal() {
+    modal.style.display = 'flex';
+  }
+
+  // Close modal
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  // Scroll to pricing section with highlight effect
+  function scrollToPricing() {
+    const pricingSection = document.getElementById('pricing');
+    const pricingBox = document.querySelector('.pricing-box');
+    
+    // Smooth scroll to pricing section
+    pricingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Add highlight animation after scroll
+    setTimeout(() => {
+      pricingBox.classList.add('highlight');
+      
+      // Remove highlight class after animation completes
+      setTimeout(() => {
+        pricingBox.classList.remove('highlight');
+      }, 2000);
+    }, 800);
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
+
+  // Handle form submission
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        formStatus.style.display = 'block';
+        formStatus.textContent = '✓ Thanks! You\'re on the list.';
+        formStatus.style.color = 'var(--accent)';
+        form.reset();
+        
+        setTimeout(() => {
+          closeModal();
+          formStatus.style.display = 'none';
+        }, 2000);
+      } else {
+        formStatus.style.display = 'block';
+        formStatus.textContent = 'Oops! Something went wrong.';
+        formStatus.style.color = '#ff6b6b';
+      }
+    } catch (error) {
+      formStatus.style.display = 'block';
+      formStatus.textContent = 'Oops! Something went wrong.';
+      formStatus.style.color = '#ff6b6b';
+    }
+  });
+</script>
+
+</body>
+</html>

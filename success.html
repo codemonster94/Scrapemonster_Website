@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome to MuscleMap Premium!</title>
+
+<style>
+  :root {
+    --bg-top: #141a1d;
+    --bg-bottom: #232e35;
+    --accent: #e5b99f;
+    --primary: #49a6ff;
+    --text-main: #f3f5f6;
+    --muted: #9aa6ad;
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    text-align: center;
+    background: rgba(255,255,255,0.02);
+    padding: 60px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .success-icon {
+    font-size: 72px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    background: linear-gradient(135deg, var(--text-main) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 30px;
+  }
+
+  .next-steps {
+    text-align: left;
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+  }
+
+  .next-steps h2 {
+    font-size: 20px;
+    margin: 0 0 20px;
+    color: var(--text-main);
+  }
+
+  .step {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+
+  .step-number {
+    background: var(--accent);
+    color: #111;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    background: var(--accent);
+    color: #111;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(229, 185, 159, 0.3);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(229, 185, 159, 0.4);
+  }
+
+  .email-notice {
+    background: rgba(73, 166, 255, 0.1);
+    border: 1px solid rgba(73, 166, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px 0;
+    color: var(--primary);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="success-icon">🎉</div>
+  <h1>Welcome to MuscleMap Premium!</h1>
+  <p>Your payment was successful. You're all set to start building balanced, muscle-first workout plans.</p>
+
+  <div class="email-notice">
+    <strong>📧 Check your email</strong><br>
+    We've sent you a confirmation receipt and instructions to get started.
+  </div>
+
+  <div class="next-steps">
+    <h2>What's Next?</h2>
+    
+    <div class="step">
+      <div class="step-number">1</div>
+      <div>Download the MuscleMap app from your app store (link in your email)</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div>Create your account using the same email you just paid with</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div>Set your muscle priorities and generate your first workout plan</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div>Start training balanced, automatically!</div>
+    </div>
+  </div>
+
+  <a href="/home.html" class="btn">← Back to Home</a>
+</div>
+
+</body>
+</html>
