@@ -7,7 +7,6 @@
 
 <style>
   :root{
-    /* Exact same colors */
     --bg-top:#141a1d;
     --bg-bottom:#232e35;
     --bg:#1f2932;
@@ -21,13 +20,9 @@
     font-family: Inter, system-ui, sans-serif;
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
@@ -40,15 +35,11 @@
     overflow-x: hidden;
   }
 
-  /* Subtle animated gradient overlay */
   body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
+    inset: 0;
+    background:
       radial-gradient(circle at 20% 30%, rgba(73, 166, 255, 0.03) 0%, transparent 50%),
       radial-gradient(circle at 80% 70%, rgba(229, 185, 159, 0.02) 0%, transparent 50%);
     pointer-events: none;
@@ -70,7 +61,6 @@
     position: relative;
   }
 
-  /* Decorative elements behind hero */
   .hero::before {
     content: '';
     position: absolute;
@@ -163,7 +153,6 @@
     background: rgba(255,255,255,0.03);
   }
 
-  /* SECTIONS */
   section {
     padding: 60px 0;
     position: relative;
@@ -180,8 +169,7 @@
     text-align: center;
     color: var(--muted);
     max-width: 620px;
-    margin: 0 auto;
-    margin-bottom: 60px;
+    margin: 0 auto 60px;
   }
 
   /* FEATURES */
@@ -211,7 +199,7 @@
     line-height: 1.6;
   }
 
-  /* MOCKUP with visual content */
+  /* MOCKUP */
   .mockup {
     width: 100%;
     max-width: 320px;
@@ -243,18 +231,11 @@
     align-items: start;
   }
 
-  .how-content {
-    display: flex;
-    flex-direction: column;
-  }
+  .how-content { display: flex; flex-direction: column; }
 
-  .how-header {
-    margin-bottom: 30px;
-  }
+  .how-header { margin-bottom: 30px; }
 
-  .how-header h2 {
-    margin-bottom: 8px;
-  }
+  .how-header h2 { margin-bottom: 8px; }
 
   .how-subtitle {
     color: var(--muted);
@@ -276,7 +257,7 @@
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .step strong {
@@ -286,16 +267,12 @@
     margin-bottom: 8px;
   }
 
-  .step span {
-    line-height: 1.6;
-  }
-
   /* PRICING */
   .pricing-box {
-    max-width: 400px;
+    max-width: 420px;
     margin: 0 auto;
     text-align: center;
-    padding: 36px 28px;
+    padding: 50px 40px;
     border-radius: 20px;
     background: linear-gradient(135deg, var(--card) 0%, rgba(39, 52, 59, 0.8) 100%);
     color: var(--text-main);
@@ -321,16 +298,12 @@
   }
 
   @keyframes pulseGlow {
-    0% {
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
+    0% { box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
     50% {
       box-shadow: 0 20px 80px rgba(229, 185, 159, 0.4), 0 0 30px rgba(229, 185, 159, 0.2);
       transform: scale(1.02);
     }
-    100% {
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
+    100% { box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
   }
 
   .pricing-badge {
@@ -342,18 +315,18 @@
     font-size: 12px;
     color: var(--accent);
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .pricing-box h2 {
     margin: 0 0 10px;
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .price {
-    font-size: 46px;
+    font-size: 52px;
     margin: 10px 0;
     font-weight: 700;
     background: linear-gradient(135deg, var(--text-main) 0%, var(--accent) 100%);
@@ -364,8 +337,8 @@
 
   .pricing-features {
     text-align: left;
-    margin: 20px 0;
-    padding: 20px 0;
+    margin: 30px 0;
+    padding: 30px 0;
     border-top: 1px solid rgba(255,255,255,0.05);
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
@@ -374,7 +347,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: var(--muted);
   }
 
@@ -383,6 +356,37 @@
     color: var(--accent);
     font-weight: 700;
     font-size: 18px;
+  }
+
+  /* FOUNDER */
+  .founder-section {
+    background: rgba(255,255,255,0.01);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 80px 24px;
+  }
+
+  .founder-card {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 32px 36px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  }
+
+  .founder-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    text-align: center;
+  }
+
+  .founder-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--muted);
   }
 
   footer {
@@ -394,15 +398,12 @@
     margin-top: 60px;
   }
 
-  /* Modal Styles */
+  /* Modal */
   .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
     align-items: center;
@@ -456,11 +457,9 @@
     background: rgba(255,255,255,0.05);
   }
 
-  .form-input::placeholder {
-    color: var(--muted);
-  }
+  .form-input::placeholder { color: var(--muted); }
 
-  /* Tooltip Styles */
+  /* Tooltip */
   .tooltip-container {
     position: relative;
     display: inline-block;
@@ -533,9 +532,7 @@
     font-weight: 600;
   }
 
-  .tooltip-link:hover {
-    text-decoration: underline;
-  }
+  .tooltip-link:hover { text-decoration: underline; }
 
   /* Responsive */
   @media (max-width: 1024px) {
@@ -546,33 +543,17 @@
   }
 
   @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 38px;
-    }
-    
-    .hero p {
-      font-size: 18px;
-    }
-
-    .steps {
-      grid-template-columns: 1fr;
-    }
-
+    .hero h1 { font-size: 38px; }
+    .hero p { font-size: 18px; }
+    .steps { grid-template-columns: 1fr; }
     .mockup {
       max-width: 280px;
       height: 520px;
       margin: 0 auto;
     }
-
-    .section-title {
-      font-size: 32px;
-    }
-
-    .how-header {
-      margin-bottom: 20px;
-    }
+    .section-title { font-size: 32px; }
+    .how-header { margin-bottom: 20px; }
   }
-
 </style>
 </head>
 <body>
@@ -603,30 +584,30 @@
     <div class="feature-grid">
       <div class="feature">
         <h3>Muscle-First Planning</h3>
-        <p style="font-weight: 600; color: var(--text-main); margin-bottom: 10px;">Stop forgetting what you trained. Stop skipping weak points.</p>
-        <p>We build your plan around muscles, not random exercises. Your weekly volume stays balanced automatically.</p>
+        <p style="font-weight:600;color:var(--text-main);margin-bottom:10px;">Stop forgetting what you trained. Stop skipping weak points.</p>
+        <p>We build your plan around muscles, not random exercises. Your weekly work stays balanced automatically.</p>
       </div>
 
       <div class="feature">
         <h3>Adaptive Soreness Logic</h3>
-        <p style="font-weight: 600; color: var(--text-main); margin-bottom: 10px;">Hit the gym how you feel — the plan adjusts instantly.</p>
+        <p style="font-weight:600;color:var(--text-main);margin-bottom:10px;">Hit the gym how you feel — the plan adjusts instantly.</p>
         <p>Sore chest? Tight shoulders? MuscleMap reshuffles your entire session without breaking your program.</p>
       </div>
 
       <div class="feature">
-        <h3>Long-Term Structure</h3>
-        <p style="font-weight: 600; color: var(--text-main); margin-bottom: 10px;">1–4 week programs that actually stay consistent.</p>
-        <p>No more re-planning every week. No burnout from programming fatigue. Just follow the plan — it stays aligned with your volume and recovery.</p>
+        <h3>Short-Term Structure</h3>
+        <p style="font-weight:600;color:var(--text-main);margin-bottom:10px;">1–4 week programs that actually stay consistent.</p>
+        <p>No more re-planning every week from scratch. Just follow the plan — it stays aligned with your goals and recovery.</p>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section style="padding-top: 80px;">
+  <section style="padding-top:80px;">
     <div class="how-it-works-container">
       <div class="how-content">
         <div class="how-header">
-          <h2 class="section-title" style="margin-bottom: 0; text-align: left;">How It Works</h2>
+          <h2 class="section-title" style="margin-bottom:0;text-align:left;">How It Works</h2>
           <div class="how-subtitle">Simple. Fast. Built around your muscles.</div>
         </div>
         
@@ -637,212 +618,185 @@
           </div>
           <div class="step">
             <strong>2. Generate your plan</strong>
-            <span>Instantly get a 1–4 week program that balances your weekly volume for you.</span>
+            <span>Instantly get a 1–4 week program that keeps your training balanced for you.</span>
           </div>
           <div class="step">
-            <strong>3. Track & adapt</strong>
+            <strong>3. Track &amp; adapt</strong>
             <span>Log your sets. Mark soreness. MuscleMap auto-rebalances the plan in real time.</span>
           </div>
         </div>
       </div>
 
       <div class="mockup">
-        <img src="images/app-screenshot.png" alt="MuscleMap App Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+        <img src="images/app-screenshot.png" alt="MuscleMap App Screenshot" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
       </div>
     </div>
   </section>
 
 </div>
 
+<!-- FOUNDER + PRICING -->
+<section class="founder-section">
+  <div class="founder-card">
+    <h2 class="founder-title">Built by Someone Who Lifts — and Gets It</h2>
 
-<!-- FOUNDER SECTION -->
-<section style="background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 24px;">
-  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-    <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 20px; color: var(--text-main);">Built by Someone Who Lifts — and Gets It</h2>
-    <div style="max-width: 800px; margin: 0 auto 60px; text-align: left;">
-      <p style="font-size: 17px; line-height: 1.7; color: var(--muted); margin-bottom: 20px;">
-        I'm <strong style="color: var(--text-main);">Guddu</strong>, a developer and lifter who was tired of:
-      </p>
-      <ul style="font-size: 17px; line-height: 1.7; color: var(--muted); margin: 0 0 20px 20px; padding: 0; list-style-position: outside;">
-        <li style="margin-bottom: 8px;">training based on mood</li>
-        <li style="margin-bottom: 8px;">forgetting what I hit three days ago</li>
-        <li style="margin-bottom: 8px;">unbalanced progress</li>
-        <li style="margin-bottom: 8px;">random workouts</li>
-        <li style="margin-bottom: 8px;">rigid programs that don't adapt</li>
-      </ul>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--muted); margin-bottom: 10px;">
-        MuscleMap was built to fix the exact problems I struggled with. A system that plans around muscles, adapts to soreness, balances your weekly volume, and removes the mental load from training.
-      </p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--muted); margin: 0;">
-        Built for lifters who want consistency — without overthinking.
-      </p>
-    </div>
+    <p class="founder-text" style="margin-bottom:16px;">
+      I'm <strong style="color:var(--text-main);">Guddu</strong>, a developer and lifter who was tired of:
+    </p>
+
+    <ul class="founder-text" style="margin:0 0 20px 20px;padding:0;list-style-position:outside;">
+      <li style="margin-bottom:6px;">training based on mood</li>
+      <li style="margin-bottom:6px;">forgetting what I hit three days ago</li>
+      <li style="margin-bottom:6px;">unbalanced progress</li>
+      <li style="margin-bottom:6px;">random workouts</li>
+      <li style="margin-bottom:6px;">rigid programs that don't adapt</li>
+    </ul>
+
+    <p class="founder-text" style="margin-bottom:8px;">
+      MuscleMap was built to fix the exact problems I struggled with — a system that plans around muscles,
+      adapts to soreness, keeps your training balanced, and removes the mental load from programming.
+    </p>
+
+    <p class="founder-text" style="margin:0;">
+      Built for lifters who want consistency — without overthinking.
+    </p>
+  </div>
+
+  <!-- PRICING -->
+  <div id="pricing" style="margin-top:80px;margin-bottom:50px;">
+    <h2 style="font-size:28px;font-weight:600;margin-bottom:16px;color:var(--text-main);text-align:center;">Early Access Pricing</h2>
+    <p style="color:var(--muted);font-size:15px;margin-bottom:40px;text-align:center;">Unlock all premium features for 6 months.</p>
     
-    <!-- PRICING MOVED HERE -->
-    <div id="pricing" style="margin-top: 80px; margin-bottom: 40px;">
-      <h2 style="font-size: 28px; font-weight: 600; margin-bottom: 12px; color: var(--text-main);">Early Access Pricing</h2>
-      <p style="color: var(--muted); font-size: 15px; margin-bottom: 28px;">Unlock all premium features for 6 months.</p>
+    <div class="pricing-box">
+      <span class="pricing-badge">Early Launch</span>
+      <h2>Premium</h2>
+      <div class="price">$9.99</div>
+      <p style="margin-bottom:0;color:var(--muted)">6-month subscription</p>
       
-      <div class="pricing-box" style="margin: 0 auto;">
-        <span class="pricing-badge">Early Launch</span>
-        <h2>Premium</h2>
-        <div class="price">$9.99</div>
-        <p style="margin-bottom:0;color:var(--muted)">6-month subscription</p>
-        
-        
-        <div class="pricing-features">
-          <div style="font-weight: 600; color: var(--text-main); margin-bottom: 12px; font-size: 16px; text-align: left;">Early Access Includes:</div>
-          <div class="pricing-feature">Muscle-first workout generator</div>
-          <div class="pricing-feature">1–4 week smart program builder</div>
-          <div class="pricing-feature">Real-time soreness adaptation</div>
-          <div class="pricing-feature">No skipped muscles</div>
-          <div class="pricing-feature">Advanced tracking & stats</div>
-        </div>
-        
-        
-        <div style="text-align: center; margin-bottom: 10px; color: var(--muted); font-size: 14px;">
-          🔒 Secure checkout powered by <svg style="height: 16px; vertical-align: middle; margin-left: 4px;" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg"><path fill="#635BFF" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.93 0 1.85 6.29.97 6.29 5.88z"/></svg>
-        </div>
-        
-        <div style="text-align: center; margin-bottom: 20px; color: var(--muted); font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center;">
-          30-Day Money-Back Guarantee
-          <span class="tooltip-container">
-            <span class="tooltip-icon">i</span>
-            <span class="tooltip-text">
-              Try MuscleMap risk-free. Not satisfied? Full refund, no questions asked.
-              <a href="refund.html" class="tooltip-link">Refund Policy →</a>
-            </span>
-          </span>
-        </div>
-        
-        <a href="https://buy.stripe.com/6oU14n1My5lfaeC9AA" class="btn btn-primary" style="width: 100%; display: block; text-decoration: none; text-align: center;">Get Started</a>
+      <div class="pricing-features">
+        <div class="pricing-feature">Muscle-first workout generator</div>
+        <div class="pricing-feature">1–4 week smart program builder</div>
+        <div class="pricing-feature">Real-time soreness adaptation</div>
+        <div class="pricing-feature">No skipped muscles</div>
+        <div class="pricing-feature">Advanced tracking &amp; stats</div>
       </div>
+      
+      <div style="text-align:center;margin-bottom:10px;color:var(--muted);font-size:14px;">
+        🔒 Secure checkout powered by
+        <svg style="height:16px;vertical-align:middle;margin-left:4px;" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg"><path fill="#635BFF" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.93 0 1.85 6.29.97 6.29 5.88z"/></svg>
+      </div>
+      
+      <div style="text-align:center;margin-bottom:20px;color:var(--muted);font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;">
+        30-Day Money-Back Guarantee
+        <span class="tooltip-container">
+          <span class="tooltip-icon">i</span>
+          <span class="tooltip-text">
+            Try MuscleMap risk-free. Not satisfied? Full refund, no questions asked.
+            <a href="refund.html" class="tooltip-link">Refund Policy →</a>
+          </span>
+        </span>
+      </div>
+      
+      <a href="https://buy.stripe.com/6oU14n1My5lfaeC9AA" class="btn btn-primary" style="width:100%;display:block;text-decoration:none;text-align:center;">Get Started</a>
     </div>
+  </div>
 </section>
 
 <!-- PREMIUM FOOTER -->
-<footer style="background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.05); padding: 32px 24px;">
-  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-    
-    <!-- Contact Section -->
-    <div style="color: var(--muted); font-size: 14px; font-weight: 500; margin-bottom: 16px;">
+<footer style="background:rgba(255,255,255,0.01);border-top:1px solid rgba(255,255,255,0.05);padding:32px 24px;">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <div style="color:var(--muted);font-size:14px;font-weight:500;margin-bottom:16px;">
       Questions or feedback?
     </div>
-    <div style="margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px;">
-      <a href="/cdn-cgi/l/email-protection#ef889a8b8b9a8d878e888e9bd7d7af88828e8683c18c8082" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 16px;"><span class="__cf_email__" data-cfemail="8deaf8e9e9f8efe5eceaecf9b5b5cdeae0ece4e1a3eee2e0">[email&#160;protected]</span></a>
-      <a href="https://www.linkedin.com/in/guddubhagat/" target="_blank" style="display: inline-flex; align-items: center;">
-        <svg style="width: 18px; height: 18px; fill: var(--muted); transition: fill 0.2s ease;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onmouseover="this.style.fill='var(--text-main)'" onmouseout="this.style.fill='var(--muted)'">
+    <div style="margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:12px;">
+      <a href="mailto:guddubhagat88@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:16px;">[Email protected]</a>
+      <a href="https://www.linkedin.com/in/guddubhagat/" target="_blank" style="display:inline-flex;align-items:center;">
+        <svg style="width:18px;height:18px;fill:var(--muted);transition:fill 0.2s ease;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onmouseover="this.style.fill='var(--text-main)'" onmouseout="this.style.fill='var(--muted)'">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
       </a>
     </div>
+
+    <div style="height:1px;background:rgba(255,255,255,0.05);margin-bottom:24px;"></div>
     
-    <!-- Divider -->
-    <div style="height: 1px; background: rgba(255,255,255,0.05); margin-bottom: 24px;"></div>
-    
-    <!-- Company Info -->
-    <div style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">
-      <strong style="color: var(--text-main); font-weight: 600;">Coding Monks OÜ</strong>, Estonia (EU) — 16568458
+    <div style="color:var(--muted);font-size:13px;margin-bottom:16px;">
+      <strong style="color:var(--text-main);font-weight:600;">Coding Monks OÜ</strong>, Estonia (EU) — 16568458
     </div>
     
-    <!-- Legal Links -->
-    <div style="font-size: 13px; margin-bottom: 16px;">
-      <a href="privacy.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
-      <span style="color: var(--muted); margin: 0 8px;">·</span>
-      <a href="terms.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
-      <span style="color: var(--muted); margin: 0 8px;">·</span>
-      <a href="refund.html" style="color: var(--muted); text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
+    <div style="font-size:13px;margin-bottom:16px;">
+      <a href="privacy.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
+      <span style="color:var(--muted);margin:0 8px;">·</span>
+      <a href="terms.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
+      <span style="color:var(--muted);margin:0 8px;">·</span>
+      <a href="refund.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
     </div>
     
-    <!-- Copyright -->
-    <div style="color: var(--muted); font-size: 12px;">
+    <div style="color:var(--muted);font-size:12px;">
       © 2024 MuscleMap — Built for serious lifters
     </div>
-    
   </div>
 </footer>
 
-
-<!-- Modal for Early Access Form -->
+<!-- Modal -->
 <div id="earlyAccessModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <h2 style="margin-top: 0; margin-bottom: 8px;">Join Early Access</h2>
-    <p style="color: var(--muted); margin-bottom: 30px;">Be the first to experience MuscleMap. Enter your email below.</p>
+    <h2 style="margin-top:0;margin-bottom:8px;">Join Early Access</h2>
+    <p style="color:var(--muted);margin-bottom:30px;">Be the first to experience MuscleMap. Enter your email below.</p>
     
     <form action="https://formspree.io/f/mrbnlwll" method="POST" id="earlyAccessForm">
       <input type="email" name="email" placeholder="your@email.com" required class="form-input" />
       <input type="text" name="name" placeholder="Your name (optional)" class="form-input" />
-      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Submit</button>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">Submit</button>
     </form>
     
-    <p id="formStatus" style="margin-top: 20px; text-align: center; color: var(--accent); display: none;"></p>
+    <p id="formStatus" style="margin-top:20px;text-align:center;color:var(--accent);display:none;"></p>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Get the modal
+<script>
   const modal = document.getElementById('earlyAccessModal');
   const form = document.getElementById('earlyAccessForm');
   const formStatus = document.getElementById('formStatus');
 
-  // Open modal
   function openModal() {
     modal.style.display = 'flex';
   }
 
-  // Close modal
   function closeModal() {
     modal.style.display = 'none';
   }
 
-  // Scroll to pricing section with highlight effect
   function scrollToPricing() {
     const pricingSection = document.getElementById('pricing');
     const pricingBox = document.querySelector('.pricing-box');
-    
-    // Smooth scroll to pricing section
     pricingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Add highlight animation after scroll
     setTimeout(() => {
       pricingBox.classList.add('highlight');
-      
-      // Remove highlight class after animation completes
       setTimeout(() => {
         pricingBox.classList.remove('highlight');
       }, 2000);
     }, 800);
   }
 
-  // Close modal when clicking outside
   window.onclick = function(event) {
-    if (event.target == modal) {
-      closeModal();
-    }
+    if (event.target == modal) closeModal();
   }
 
-  // Handle form submission
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = new FormData(form);
-    
     try {
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
-      
       if (response.ok) {
         formStatus.style.display = 'block';
         formStatus.textContent = '✓ Thanks! You\'re on the list.';
         formStatus.style.color = 'var(--accent)';
         form.reset();
-        
         setTimeout(() => {
           closeModal();
           formStatus.style.display = 'none';
